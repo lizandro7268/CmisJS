@@ -109,6 +109,9 @@ var cmis;
             else {
                 cfg.credentials = 'include';
             }
+            if(this.cookie && !cfg.headers['Cookie']){
+                cfg.headers['Cookie'] = this.cookie;
+            }
             if (multipartData) {
                 var formData = new FormData();
                 var content = multipartData.content;
@@ -161,6 +164,10 @@ var cmis;
         };
         CmisSession.prototype.setToken = function (token) {
             this.token = token;
+            return this;
+        };
+        CmisSession.prototype.setCookie = function (cookie) {
+            this.cookie = cookie;
             return this;
         };
         CmisSession.prototype.setCredentials = function (username, password) {

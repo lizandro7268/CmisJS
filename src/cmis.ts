@@ -148,6 +148,7 @@ export namespace cmis {
 
     private url: string;
     private token: string;
+    private cookie: string;
     private username: string;
     private errorHandler: (err: Error) => void;
     private password: string;
@@ -255,7 +256,9 @@ export namespace cmis {
       } else {
         cfg.credentials = 'include';
       }
-
+      if(this.cookie){
+        cfg.headers['Cookie'] = this.cookie
+      }
       if (multipartData) {
         let formData = new FormData();
 
@@ -347,6 +350,14 @@ export namespace cmis {
       this.token = token;
       return this;
     }
+
+        /**
+     * sets cookie for authentication
+     */
+         public setCookie(cookie: string): CmisSession {
+          this.cookie = cookie;
+          return this;
+        }
 
 
     /**
